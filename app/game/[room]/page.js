@@ -145,6 +145,46 @@ export default function Game() {
                     <div className="text-gray-400 animate-pulse">Waiting for more players...</div>
                 )}
             </div>
+        ) : gameState.status === 'GAME_OVER' ? (
+            <div className="flex flex-col items-center justify-center h-[80vh]">
+                {gameState.winner === myId ? (
+                    <>
+                        <h1 className="text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-8 animate-bounce drop-shadow-lg">
+                            VICTORY!
+                        </h1>
+                        <div className="bg-gray-800 p-12 rounded-2xl shadow-2xl text-center border-4 border-yellow-500 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-yellow-500/10 animate-pulse"></div>
+                            <div className="text-6xl mb-6">🏆</div>
+                            <div className="text-3xl font-bold text-white mb-8 relative z-10">
+                                You are the Champion!
+                            </div>
+                            <button 
+                                onClick={() => window.location.reload()} 
+                                className="bg-green-600 hover:bg-green-500 px-10 py-4 rounded-xl font-bold text-2xl transition-all transform hover:scale-105 shadow-lg relative z-10"
+                            >
+                                Play Again
+                            </button>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <h1 className="text-6xl font-bold text-gray-500 mb-8">GAME OVER</h1>
+                        <div className="bg-gray-800 p-12 rounded-2xl shadow-xl text-center border-2 border-gray-700">
+                            <h2 className="text-2xl text-gray-400 mb-4">Winner</h2>
+                            <div className="text-4xl font-bold text-yellow-500 mb-8">
+                                {gameState.players.find(p => p.id === gameState.winner)?.name}
+                            </div>
+                            <div className="text-xl text-gray-500 mb-8">Better luck next time!</div>
+                            <button 
+                                onClick={() => window.location.reload()} 
+                                className="bg-gray-700 hover:bg-gray-600 px-8 py-3 rounded-lg font-bold text-xl transition-colors border border-gray-600"
+                            >
+                                Back to Lobby
+                            </button>
+                        </div>
+                    </>
+                )}
+            </div>
         ) : (
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6">
                 {/* Opponents Area */}
